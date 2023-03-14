@@ -1,7 +1,9 @@
 .navWrapper {
     display: flex;
     align-items: center;
-    padding: 20px 20px 20px 0;
+    justify-content: center;
+    padding: 20px 20px 20px 0px;
+ 
 }
 
 .userWrapper {
@@ -13,10 +15,14 @@
 }
 
 .menuWrapper {
+    background-color: rgb(166, 166, 208);
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: 325px;
+    justify-content: center;
+    width: 100%;
+    gap: 30px;
+    padding: 10px;
+ 
 }
 
 .link {
