@@ -18,23 +18,19 @@ export const ContactItem = ({ data }) => {
   };
   return (
     <>
-      {ContactItem.length > 0 ? (
-        <li className={styles.contactItem}>
-          <p className={styles.contactText}>
-            {name}: {number}
-          </p>
-          <button
-            type="button"
-            className={styles.contactBtn}
-            id={id}
-            onClick={e => onDeleteClick(e, id)}
-          >
-            Delete
-          </button>
-        </li>
-      ) : (
-        <p>No contacts</p>
-      )}
+      <li className={styles.contactItem}>
+        <p className={styles.contactText}>
+          {name}: {number}
+        </p>
+        <button
+          type="button"
+          className={styles.contactBtn}
+          id={id}
+          onClick={e => onDeleteClick(e, id)}
+        >
+          Delete
+        </button>
+      </li>
     </>
   );
   //         return (

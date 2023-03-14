@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import {
   registerUser,
   loginUser,
@@ -20,68 +19,63 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: {
-    [registerUser.pending](state) {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [registerUser.fulfilled](state, { payload }) {
-      state.isLoading = false;
-      state.isLoggedIn = true;
-      state.token = payload.token;
-      state.user = payload.user;
-      toast.success('Successfully registered!');
-    },
-    [registerUser.rejected](state, { payload }) {
-      state.isLoading = false;
-      state.error = payload;
-      toast.error('Something is wrong, try again!');
-    },
-    [loginUser.pending](state) {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [loginUser.fulfilled](state, { payload }) {
-      state.isLoading = false;
-      state.isLoggedIn = true;
-      state.token = payload.token;
-      state.user = payload.user;
-      toast.success('Successfully logged in!');
-    },
-    [loginUser.rejected](state, { payload }) {
-      state.isLoading = false;
-      state.error = payload;
-      toast.error('Something is wrong, try again!');
-    },
-    [logoutUser.pending](state) {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [logoutUser.fulfilled](state) {
-      state.isLoading = false;
-      state.isLoggedIn = false;
-      state.user = { name: null, email: null };
-      state.token = null;
-      toast.success('Successfully logged out! Waiting for you to come back!');
-    },
-    [logoutUser.rejected](state, { payload }) {
-      state.isLoading = false;
-      state.error = payload;
-      toast.error('Something is wrong, try again later!');
-    },
-    [fetchCurrentUser.pending](state) {
-      state.isLoadingUser = true;
-      state.error = null;
-    },
-    [fetchCurrentUser.fulfilled](state, { payload }) {
-      state.isLoadingUser = false;
-      state.isLoggedIn = true;
-      state.user = payload;
-    },
-    [fetchCurrentUser.rejected](state, { payload }) {
-      state.isLoadingUser = false;
-      state.error = payload;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(registerUser.pending, store => {
+        store.isLoading = true;
+        store.error = null;
+      })
+      .addCase(registerUser.fulfilled, (store, { payload }) => {
+        store.isLoading = false;
+        store.isLoggedIn = true;
+        store.token = payload.token;
+        store.user = payload.user;
+      })
+      .addCase(registerUser.rejected, (store, { payload }) => {
+        store.isLoading = false;
+        store.error = payload;
+      })
+      .addCase(loginUser.pending, store => {
+        store.isLoading = true;
+        store.error = null;
+      })
+      .addCase(loginUser.fulfilled, (store, { payload }) => {
+        store.isLoading = false;
+        store.isLoggedIn = true;
+        store.token = payload.token;
+        store.user = payload.user;
+      })
+      .addCase(loginUser.rejected, (store, { payload }) => {
+        store.isLoading = false;
+        store.error = payload;
+      })
+      .addCase(logoutUser.pending, store => {
+        store.isLoading = true;
+        store.error = null;
+      })
+      .addCase(logoutUser.fulfilled, store => {
+        store.isLoading = false;
+        store.isLoggedIn = false;
+        store.user = { name: null, email: null };
+        store.token = null;
+      })
+      .addCase(logoutUser.rejected, (store, { payload }) => {
+        store.isLoading = false;
+        store.error = payload;
+      })
+      .addCase(fetchCurrentUser.pending, store => {
+        store.isLoadingUser = true;
+        store.error = null;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (store, { payload }) => {
+        store.isLoadingUser = false;
+        store.isLoggedIn = true;
+        store.user = payload;
+      })
+      .addCase(fetchCurrentUser.rejected, (store, { payload }) => {
+        store.isLoadingUser = false;
+        store.error = payload;
+      });
   },
 });
 

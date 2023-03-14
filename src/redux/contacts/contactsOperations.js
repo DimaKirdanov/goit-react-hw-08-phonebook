@@ -4,6 +4,7 @@ import {
   addContactToAPI,
   removeContactFromAPI,
 } from 'components/API/API';
+import Notiflix from 'notiflix';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -22,6 +23,7 @@ export const addContact = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const result = await addContactToAPI(data);
+      Notiflix.Notify.success('CONTACT ADDED');
       return result;
     } catch (error) {
       thunkAPI.rejectWithValue(error);
@@ -34,6 +36,7 @@ export const removeContact = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const result = await removeContactFromAPI(id);
+      Notiflix.Notify.info('CONTACT DELETED');
       return result;
     } catch (error) {
       thunkAPI.rejectWithValue(error);
